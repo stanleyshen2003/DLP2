@@ -37,7 +37,7 @@ def test(model_path):
 
 def train():
     epochs = 3000
-    lr = 0.1
+    lr = 0.01
     model_name = 'VGG19'
     assert model_name in ['VGG19', 'resnet']
     load_name = None

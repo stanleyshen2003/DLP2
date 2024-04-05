@@ -75,17 +75,17 @@ class ButterflyMothLoader(data.Dataset):
         img = self.images[index]
         # normalize the image
         
-        if self.mode == 'train':
-            flip = np.random.randint(0, 2)
-            rotate_degree = np.random.randint(0, 45)
-            #rotate_degree = np.random.choice([rotate_degree, -rotate_degree])
-            img = img.rotate(rotate_degree)
-            if flip == 1:
-                img = img.transpose(Image.FLIP_LEFT_RIGHT)
+        # if self.mode == 'train':
+        #     flip = np.random.randint(0, 2)
+        #     rotate_degree = np.random.randint(0, 45)
+        #     #rotate_degree = np.random.choice([rotate_degree, -rotate_degree])
+        #     img = img.rotate(rotate_degree)
+        #     if flip == 1:
+        #         img = img.transpose(Image.FLIP_LEFT_RIGHT)
                 
         img = np.array(img, dtype=np.float32)
-        img = normalize(img)
-        #img = img / 255.0
+        #img = normalize(img)
+        img = img / 255.0
         img = img.transpose((2, 0, 1))
         
         return img, self.labels[index]
