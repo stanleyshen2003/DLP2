@@ -37,7 +37,7 @@ def test(model_path):
 
 def train():
     epochs = 3000
-    lr = 0.005
+    lr = 0.1
     model_name = 'VGG19'
     assert model_name in ['VGG19', 'resnet']
     load_name = None
@@ -78,14 +78,14 @@ def train():
         print(f"Loss: {loss_sum}")
         train_writer.add_scalar('Loss', loss_sum, epoch)
         
-        if epoch % 10 == 0:
+        if epoch % 5 == 0:
             train_acc= evaluate(model, data)
             train_writer.add_scalar('Accuracy', train_acc, epoch)
             print(f"Train Accuracy: {train_acc}")
             eval_acc = evaluate(model, validdata)
             validate_writer.add_scalar('Accuracy', eval_acc, epoch)
             print(f"Valid Accuracy: {eval_acc}")
-        if epoch % 200 == 0 and epoch != 0:
+        if epoch % 50 == 0 and epoch != 0:
             test_acc = evaluate(model, testdata)
             torch.save(model.state_dict(), 'model/'+model_name+'/'+str(epoch) +'_'+str(eval_acc)+ '_' + str(test_acc)+'.pth')
     torch.save(model.state_dict(), 'model.pth')

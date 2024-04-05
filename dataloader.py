@@ -20,7 +20,7 @@ def normalize(arr):
         maxval = arr[...,i].max()
         if minval != maxval:
             arr[...,i] -= minval
-            arr[...,i] *= (255.0/(maxval-minval))
+            arr[...,i] /= (maxval-minval)
     return arr
 
 class ButterflyMothLoader(data.Dataset):
@@ -84,10 +84,6 @@ class ButterflyMothLoader(data.Dataset):
                 img = img.transpose(Image.FLIP_LEFT_RIGHT)
                 
         img = np.array(img, dtype=np.float32)
-        #img = img/255.0
-        transformation = v2.Compose([
-            v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ])
         img = normalize(img)
         #img = img / 255.0
         img = img.transpose((2, 0, 1))
